@@ -328,6 +328,10 @@ class TubeApp extends HTMLElement {
     });
     this._buildBoard();
     this._getLines();
+    this.ref[''].addEventListener('change',()=>{
+      this._setLine(this.ref['lines'].value);
+    });
+
     setTimeout(()=>{
       this._getArrivals();
       this._loop();
