@@ -1,0 +1,72 @@
+{
+  "name": "tube-timetable",
+  "version": "0.0.1",
+  "description": "Split card example with London Tube",
+  "main": "index.js",
+  "scripts": {
+    "cc": "node scripts/createComponent.js",
+    "copyapp": "cpx 'web/**/*.*' app && cpx 'dist/**/*.js' app",
+    "build:deploy": "rollup -c --environment BUILD:production",
+    "build": "rollup -c --environment BUILD:dev",
+    "docker": "node scripts/dockerBuild",
+    "docker-run": "node scripts/dockerStart",
+    "predeploy": "npm run build && workbox generateSW ./workbox-config.js",
+    "deploy": " npm run copyapp",
+    "prestart": "npm run build",
+    "prestart:deploy": "npm run deploy",
+    "start": "browser-sync start -c ./bs-config.js & npm run watchStyle",
+    "start:deploy": "browser-sync start -c ./deploy-web-config.js & npm run watchStyle",
+    "test": "karma start spec/karma.config.js",
+    "watchStyle": "watch 'npm run build' src/",
+    "watchDeploy":"watch 'npm run deplay' src/",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jcdalton2201/tube-timetable"
+  },
+  "keywords": [
+    "Tube",
+    "split card",
+    "web"
+  ],
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "glob-fs": "^0.1.7",
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "karma": "^2.0.5",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.2",
+    "karma-coverage-istanbul-reporter": "^2.0.4",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-jasmine": "^1.1.2",
+    "karma-jasmine-html-reporter": "^1.4.0",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-rollup-preprocessor": "^6.1.1",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.11.0",
+    "proxy-middleware": "^0.15.0",
+    "replacestream": "^4.0.3",
+    "rollup": "^0.67.4",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-istanbul": "^2.0.1",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-terser": "^3.0.0",
+    "sonarqube-scanner": "^2.1.2",
+    "standard-version": "^4.4.0",
+    "watch": "^1.0.2",
+    "workbox-cli": "^3.6.3"
+  },
+  "author": "Jason Dalton",
+  "license": "MIT",
+  "dependencies": {
+    "babel-jest": "^23.6.0",
+    "cpx": "^1.5.0",
+    "docker-cmd-js": "^4.1.0",
+    "eslint": "^5.11.1",
+    "jasmine-core": "^3.3.0",
+    "rollup-plugin-uglify-es": "0.0.1",
+    "uglify-es": "^3.3.9"
+  }
+}
