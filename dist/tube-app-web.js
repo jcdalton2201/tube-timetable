@@ -329,7 +329,7 @@ class TubeApp extends HTMLElement {
     this._buildBoard();
     this._getLines();
     this.ref['lines-select'].addEventListener('change',()=>{
-      this._setLine(this.ref['lines-select'].value);
+      this._setLines(this.ref['lines-select'].value);
     });
 
     setTimeout(()=>{
