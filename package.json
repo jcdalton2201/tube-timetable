@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "cc": "node scripts/createComponent.js",
-    "copyapp": "cpx 'web/**/*.*' app && cpx 'dist/**/*.js' app",
+    "copyapp": "cpx 'web/**/*.*' docs && cpx 'dist/**/*.js' docs",
     "build:deploy": "rollup -c --environment BUILD:production",
     "build": "rollup -c --environment BUILD:dev",
     "docker": "node scripts/dockerBuild",
@@ -15,7 +15,7 @@
     "prestart": "npm run build",
     "prestart:deploy": "npm run deploy",
     "start": "browser-sync start -c ./bs-config.js & npm run watchStyle",
-    "start:deploy": "browser-sync start -c ./deploy-web-config.js & npm run watchStyle",
+    "start:deploy": "browser-sync start -c ./docs-config.js & npm run watchStyle",
     "test": "karma start spec/karma.config.js",
     "watchStyle": "watch 'npm run build' src/",
     "watchDeploy": "watch 'npm run deplay' src/",

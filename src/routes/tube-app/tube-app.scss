@@ -1,0 +1,17 @@
+#line {
+    display:grid;
+    grid-template-columns: repeat(28, 50px);
+    grid-gap:1px;
+    margin:10px 0 0 0;
+}
+#board {
+    display:grid;
+    grid-template-columns: repeat(28, 50px);
+    grid-gap:1px;
+    margin:10px 0 0 0; 
+}
+#text-display {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-column-gap: 5px;
+}

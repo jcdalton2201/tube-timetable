@@ -26,7 +26,7 @@ class TubeSplitFlap extends TubeBase {
     this.ref('next-bottom').innerText = this.getLetter(this.currentLocation +1);
     this.ref('next').innerText = this.getLetter(this.currentLocation +1);
     this.ref('wrapper').addEventListener('click',this.nextChar);
-    this.clickSound = new Audio('export.wav');
+    // this.clickSound = new Audio('export.wav');
   }
   nextChar(event){
     this.flipTop();
