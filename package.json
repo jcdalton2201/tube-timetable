@@ -18,7 +18,7 @@
     "start:deploy": "browser-sync start -c ./deploy-web-config.js & npm run watchStyle",
     "test": "karma start spec/karma.config.js",
     "watchStyle": "watch 'npm run build' src/",
-    "watchDeploy":"watch 'npm run deplay' src/",
+    "watchDeploy": "watch 'npm run deplay' src/",
     "lint": "eslint src"
   },
   "repository": {

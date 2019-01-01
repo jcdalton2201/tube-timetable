@@ -63,20 +63,20 @@ if(!customElements.get('tube-${name}')){
     writeStream.end();
     fs.createReadStream(file)
       .pipe(writeStream);
-    console.log(chalk.green(`we have created html file devnav-${name}.html`));
+    console.log(chalk.green(`we have created html file tube-${name}.html`));
   }
   _buildTest(name,dir){
-    const file = `spec${dir}/devnav-${name}/devnav-${name}-spec.js`;
+    const file = `spec${dir}/tube-${name}/tube-${name}-spec.js`;
     const writeStream = fs.createWriteStream(file);
     writeStream.write(`
-import '../../../dist${dir}/devnav-${name}';
+import '../../../dist${dir}/tube-${name}';
 describe('Test of ${this._slug(name)}', ()=>{
   let elem;
   afterEach(()=>{
     document.innerHTML = '';
   });
   beforeEach(()=>{
-    elem = document.createElement('devnav-${name}');
+    elem = document.createElement('tube-${name}');
   });
   it('Test we can spec', ()=>{
     document.body.appendChild(elem);
@@ -88,14 +88,14 @@ describe('Test of ${this._slug(name)}', ()=>{
     writeStream.end();
     fs.createReadStream(file)
       .pipe(writeStream);
-    console.log(chalk.green(`we have created spec file devnav-${name}.js`));
+    console.log(chalk.green(`we have created spec file tube-${name}.js`));
   }
   _buildSASS(name,dir){
-    const file = `src${dir}/devnav-${name}/devnav-${name}.scss`;
+    const file = `src${dir}/tube-${name}/tube-${name}.scss`;
     const writeStream = fs.createWriteStream(file);
     fs.createReadStream(file)
       .pipe(writeStream);
-    console.log(chalk.green(`we have created sass file devnav-${name}.scss`));
+    console.log(chalk.green(`we have created sass file tube-${name}.scss`));
   }
 }
 new createComponent();
