@@ -1,5 +1,7 @@
 var proxy = require('proxy-middleware');
 var url = require('url');
+var proxyListing = url.parse('http://localhost:8050');
+proxyListing.route = '/tube-timetable'
 
 /*
  |--------------------------------------------------------------------------
@@ -27,6 +29,7 @@ module.exports = {
   proxy: false,
   port: 8050,
   middleware: [
+    proxy(proxyListing)
   ],
   single:true,
   serveStatic: ['web','dist'],
