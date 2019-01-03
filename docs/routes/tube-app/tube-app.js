@@ -57,7 +57,7 @@ export class TubeApp extends HTMLElement {
   _showArrival(event){
     this._setBoard(event.data);
     this.myTimeout = setTimeout(()=>{
-      this.arrivalWorker.postMessage(this.ref['lines-select'].value);
+      this.arrivalWorker.postMessage(this.ref['station-select'].value);
     },this.timeout);
   }
 
