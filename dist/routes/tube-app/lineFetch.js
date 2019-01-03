@@ -1,10 +1,11 @@
 onmessage = (event) =>{
-    fetch('https://api.tfl.gov.uk/Line/Mode/tube/Route?serviceTypes=Regular')
-    .then(res=> res.json())
-    .then((data)=>{
-      const opt = data.map(item => item.name).map((item)=>{
+    console.log(event.data);
+    // fetch('https://api.tfl.gov.uk/Line/Mode/tube/Route?serviceTypes=Regular')
+    // .then(res=> res.json())
+    // .then((data)=>{
+      const opt = event.data.option.map((item)=>{
         return `<option value='${item}'>${item}</option>`;
       });
-      postMessage(opt.join(''));
-    })
+      postMessage({option:opt.join(''),ref:event.data.ref});
+
 }

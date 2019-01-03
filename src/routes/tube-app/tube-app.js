@@ -1,7 +1,9 @@
 import '../../widgets/tube-board/tube-board.js';
+import {Lines} from '../../utils/lines.js';
 export class TubeApp extends HTMLElement {
   constructor(){
     super();
+    this.lines = (new Lines()).stations();
     this.root = this.attachShadow({ mode: 'open' });
     this.lineSize = 18;
     this.boardSize = 140;
@@ -11,6 +13,7 @@ export class TubeApp extends HTMLElement {
     this['_showLine'] = this['_showLine'].bind(this);
     this['_showArrival'] = this['_showArrival'].bind(this);
     this.myTimeout;
+    
   }
   connectedCallback() {
     this.ref = {};
@@ -18,24 +21,35 @@ export class TubeApp extends HTMLElement {
     this.root.querySelectorAll('[data-ref]').forEach((item)=>{
       this.ref[item.getAttribute('data-ref')] = item;
     });
-    this.myWorker.postMessage('');
+    this.myWorker.postMessage({option:Object.keys(this.lines),ref:'lines-select'});
     this.myWorker.onmessage = this._showLine;
+    this._buildStation('bakerloo');
     this.arrivalWorker.onmessage = this._showArrival;
-    this.arrivalWorker.postMessage('Backerloo');
+    this.arrivalWorker.postMessage('Bakerloo');
     this._getLines();
+    this.arrivalWorker.postMessage('Baker Street Underground Station');
+
     this.ref['lines-select'].addEventListener('change',()=>{
       clearTimeout(this.myTimeout);
-      this._setLines(this.ref['lines-select'].value);
-      this.arrivalWorker.postMessage(this.ref['lines-select'].value);
+      this._buildStation(this.ref['lines-select'].value);
+    });
+    this.ref['station-select'].addEventListener('change',()=>{
+      this._setLines(this.ref['station-select'].value.replace('Underground Station','').substring(0,18));
+      this.arrivalWorker.postMessage(this.ref['station-select'].value);
     });
   }
 
   render(){
     this.root.innerHTML = tempHtml;
   }
+  _buildLines(){
+    
+  }
   _showLine(event){
-    this.ref['lines-select'].innerHTML = event.data;
-    console.log(event.data);
+    this.ref[event.data.ref].innerHTML = event.data.option;
+  }
+  _buildStation(line){
+    this.myWorker.postMessage({option:this.lines[line],ref:'station-select'});
   }
 
   
@@ -58,7 +72,7 @@ export class TubeApp extends HTMLElement {
     });
   }
   _getLines(){
-    this._setLines('Backerloo');
+    this._setLines('Baker Street'.substring(0,18));
   }
   _setLines(text){
     const splitFlaps = this.ref['line'].querySelectorAll('tube-split-flap');

@@ -8,15 +8,16 @@ function _compareVehicacles(a,b){
     return 0;
   }
 onmessage = (event) =>{
-    fetch('https://api.tfl.gov.uk/Mode/tube/Arrivals?count=1')
+    console.log(event);
+    fetch('https://api.tfl.gov.uk/Mode/tube/Arrivals?count=5')
     .then(res=> res.json())
     .then((data)=> {
         data.sort(_compareVehicacles);
         let linesData = data.filter((item)=>{
-            return item.lineName === event.data;
+            return item.stationName === event.data;
         });
         let text = linesData.slice(0, 5).map((item)=>{
-            const line = item.stationName.substring(0,10);
+            const line = item.lineName.substring(0,10);
             const platform = item.platformName.substring(item.platformName.length-1);
             const towards = item.towards.substring(0,11);
             const arrival = parseInt(item.timeToStation /60);
