@@ -1,12 +1,12 @@
 #line {
     display:grid;
-    grid-template-columns: repeat(28, 50px);
+    grid-template-columns: repeat(28, calc(100% / 29));
     grid-gap:1px;
     margin:10px 0 0 0;
 }
 #board {
     display:grid;
-    grid-template-columns: repeat(28, 50px);
+    grid-template-columns: repeat(28, calc(100% / 29));
     grid-gap:1px;
     margin:10px 0 0 0; 
 }
@@ -26,3 +26,11 @@ nav {
         text-shadow: #8e8e8e 1px 1px 2px;
     }
 }
+// @media screen and (max-width: 640px){
+//     #line {
+//         grid-template-columns: repeat(28, 14px);  
+//     }
+//     #board {
+//         grid-template-columns: repeat(28, 14px);  
+//     }
+// }

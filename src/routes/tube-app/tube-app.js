@@ -8,14 +8,20 @@ export class TubeApp extends HTMLElement {
     this.lineSize = 18;
     this.boardSize = 140;
     this.timeout = 60000;
+    this.size = '50px';
+    this.resizeTimeout;
     this.myWorker = new Worker('/tube-timetable/routes/tube-app/lineFetch.js');
     this.arrivalWorker = new Worker('/tube-timetable/routes/tube-app/arrivalFetch.js');
     this['_showLine'] = this['_showLine'].bind(this);
     this['_showArrival'] = this['_showArrival'].bind(this);
+    this['resizeThrottler'] = this['resizeThrottler'].bind(this);
+    this['resizeHandler'] = this['resizeHandler'].bind(this);
     this.myTimeout;
+    this.newSize = '0px';
     
   }
   connectedCallback() {
+    this.size = parseInt(screen.width/27)+'px';
     this.ref = {};
     this.render();
     this.root.querySelectorAll('[data-ref]').forEach((item)=>{
@@ -37,8 +43,29 @@ export class TubeApp extends HTMLElement {
       this._setLines(this.ref['station-select'].value.replace('Underground Station','').substring(0,18));
       this.arrivalWorker.postMessage(this.ref['station-select'].value);
     });
+    window.addEventListener('resize',this.resizeThrottler);
   }
-
+  resizeThrottler(){
+    if ( !this.resizeTimeout ) {
+      this.resizeTimeout = setTimeout(() => {
+        this.resizeTimeout = null;
+        this.resizeHandler();
+     
+       // The actualResizeHandler will execute at a rate of 15fps
+       }, 66);
+    }
+  }
+  resizeHandler(){
+    console.log(parseInt(screen.width/27));
+    
+    if(this.newSize !== parseInt(screen.width/27)+'px'){
+      this.newSize = parseInt(screen.width/27)+'px';
+      this.root.querySelectorAll('tube-split-flap').forEach((item)=>{
+        item.size = parseInt(screen.width/27)+'px';
+      });
+    }
+    
+  }
   render(){
     this.root.innerHTML = tempHtml;
   }
