@@ -17,6 +17,7 @@
         overflow: hidden;
         z-index: 0;
         transform-origin: bottom;
+        will-change: transform;
     }
     #bottom {
         position: absolute;
@@ -29,6 +30,7 @@
         z-index: 0;
         transform-origin: bottom;
         clip-path: polygon(0% 50%, 100% 50%, 100% 100%, 0% 100%);
+        will-change: transform;
     }
     #next-bottom {
         position: absolute;
@@ -42,6 +44,7 @@
         transform-origin: center;
         clip-path: polygon(0% 50%, 100% 50%, 100% 100%, 0% 100%);
         transform: rotateX(-90deg);
+        will-change: transform;
     }
     #next {
         position: absolute;
@@ -53,6 +56,7 @@
         transform-origin: center;
         clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%);
         z-index: -1;
+        will-change: transform;
         
     }
     .flip-down {
